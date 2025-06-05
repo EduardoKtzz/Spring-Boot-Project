@@ -6,7 +6,9 @@ import com.klitzke.aula.Enums.OrderStatus;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 //Anotação para informar que a classe vai fazer parte do nosso banco de dados
 @Entity
@@ -27,6 +29,9 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> item = new HashSet<>();
 
     //Construtores
     public Order(){
@@ -74,6 +79,10 @@ public class Order implements Serializable {
 
     public void setClient(User client) {
         this.client = client;
+    }
+
+    public Set<OrderItem> getItems() {
+        return item;
     }
 
     //Equals

@@ -1,14 +1,8 @@
 package com.klitzke.aula.config;
 
 import com.klitzke.aula.Enums.OrderStatus;
-import com.klitzke.aula.entities.Category;
-import com.klitzke.aula.entities.Order;
-import com.klitzke.aula.entities.Product;
-import com.klitzke.aula.entities.User;
-import com.klitzke.aula.repositories.CategoryRepository;
-import com.klitzke.aula.repositories.OrderRepositoty;
-import com.klitzke.aula.repositories.ProductRepository;
-import com.klitzke.aula.repositories.UserRepository;
+import com.klitzke.aula.entities.*;
+import com.klitzke.aula.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +26,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     //Tudo que for colocado aqui dentro, vai ser implementado quando o objeto for reiniciado
     @Override
@@ -75,7 +72,14 @@ public class TestConfig implements CommandLineRunner {
         //Salvando associações no banco de dados
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 
+        //Instanciando para o banco de dados
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 
+        //Inserindo no banco de dados
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 
 
 

@@ -1,5 +1,6 @@
 package com.klitzke.aula.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.klitzke.aula.entities.pk.OrderItemPK;
 import jakarta.persistence.*;
 import java.io.Serializable;
@@ -11,7 +12,7 @@ public class OrderItem implements Serializable {
 
     //Atributos
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
     private Integer quantity;
     private Double price;
 
@@ -31,6 +32,7 @@ public class OrderItem implements Serializable {
     }
 
     //Getters e Setters
+    @JsonIgnore
     public Order getOrder() {
         return id.getOrder();
     }

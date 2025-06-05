@@ -1,11 +1,9 @@
 package com.klitzke.aula.services;
 
 import com.klitzke.aula.entities.Order;
-import com.klitzke.aula.entities.User;
 import com.klitzke.aula.repositories.OrderRepositoty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 

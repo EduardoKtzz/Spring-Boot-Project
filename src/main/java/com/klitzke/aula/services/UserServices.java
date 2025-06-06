@@ -14,7 +14,7 @@ public class UserServices {
     @Autowired
     private UserRepository repository;
 
-    //Buscar todos os users
+    //Buscar todos os ‘users’
     public List<User> findAll() {
         return repository.findAll();
     }
@@ -23,6 +23,10 @@ public class UserServices {
     public User findById(Long id) {
         Optional<User> obj = repository.findById(id);
         return obj.get();
+    }
+
+    public User insert(User obj) {
+        return repository.save(obj);
     }
 
 }

@@ -2,8 +2,10 @@ package com.klitzke.aula.services;
 
 import com.klitzke.aula.entities.User;
 import com.klitzke.aula.repositories.UserRepository;
+import com.klitzke.aula.services.exceptions.DatabaseException;
 import com.klitzke.aula.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +35,14 @@ public class UserServices {
 
     //Delete 'users'
     public void delete(Long id) {
-        repository.deleteById(id);
+        try {
+            if(!repository.existsById(id)) throw new ResourceNotFoundException(id);
+            repository.deleteById(id);
+        }catch (ResourceNotFoundException e){
+            throw new ResourceNotFoundException(id);
+        } catch (DataIntegrityViolationException e1) {
+            throw new DatabaseException(e1.getMessage());
+        }
     }
 
     //Atualizar 'users'

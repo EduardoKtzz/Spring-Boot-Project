@@ -1,5 +1,6 @@
 package com.klitzke.aula.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -15,6 +16,7 @@ public class Payment implements Serializable {
     private Instant moment;
 
     //Associações
+    @JsonIgnore
     @OneToOne
     @MapsId
     private Order order;

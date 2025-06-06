@@ -1,7 +1,6 @@
 package com.klitzke.aula.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.klitzke.aula.Enums.OrderStatus;
 import jakarta.persistence.*;
 import java.io.Serializable;
@@ -94,6 +93,14 @@ public class Order implements Serializable {
 
     public Set<OrderItem> getItems() {
         return item;
+    }
+
+    public Double getTotal() {
+        double sum = 0.0;
+        for (OrderItem x : item) {
+            sum += x.getSubTotal();
+        }
+        return sum;
     }
 
     //Equals

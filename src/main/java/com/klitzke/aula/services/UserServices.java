@@ -2,6 +2,7 @@ package com.klitzke.aula.services;
 
 import com.klitzke.aula.entities.User;
 import com.klitzke.aula.repositories.UserRepository;
+import com.klitzke.aula.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class UserServices {
     //Buscar usuário por 'ID'
     public User findById(Long id) {
         Optional<User> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     //Inserir 'users'
